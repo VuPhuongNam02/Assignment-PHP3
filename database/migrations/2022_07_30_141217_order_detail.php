@@ -18,8 +18,9 @@ class OrderDetail extends Migration
             function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('orderId');
-                $table->integer('productId');
+                $table->unsignedBigInteger('productId');
                 $table->integer('quantity');
+                $table->foreign('productId')->references('id')->on('products');
                 $table->foreign('orderId')->references('id')->on('orders');
                 $table->timestamps();
             }

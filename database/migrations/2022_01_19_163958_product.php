@@ -23,7 +23,6 @@ class Product extends Migration
             $table->string('image');
             $table->longText('description');
             $table->string('brand');
-            $table->string('size');
             $table->integer('status');
             $table->unsignedBigInteger('categoryId');
             $table->foreign('categoryId')->references('id')->on('categories');

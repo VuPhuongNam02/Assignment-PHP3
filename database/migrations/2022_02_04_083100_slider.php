@@ -19,7 +19,8 @@ class Slider extends Migration
             $table->string('url', 255)->nullable();
             $table->string('thumb', 255);
             $table->timestamps();
-        });    }
+        });
+    }
 
     /**
      * Reverse the migrations.

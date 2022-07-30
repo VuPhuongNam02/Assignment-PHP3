@@ -17,7 +17,6 @@ class Category extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->integer('parent');
             $table->timestamps();
         });
     }

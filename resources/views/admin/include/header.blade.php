@@ -24,6 +24,7 @@
                 <span class="ti-unlink"></span>
                 <span>KShop</span>
             </h3>
+            <a href="/logout">Logout</a>
             <label for="sidebar-toggle" class="ti-menu-alt"></label>
         </div>
 

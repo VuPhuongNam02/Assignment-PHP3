@@ -36,9 +36,9 @@ Route::middleware('CheckAdmin')->group(function () {
         Route::get('list', [AdminCategory::class, 'index'])->name('list.cate');
         Route::get('create', [AdminCategory::class, 'create']);
         Route::post('store', [AdminCategory::class, 'store']);
-        Route::get('edit/{id}', [AdminCategory::class, 'edit']);
-        Route::post('update/{id}', [AdminCategory::class, 'update']);
-        Route::get('delete/{id}', [AdminCategory::class, 'delete']);
+        Route::get('edit/{category}', [AdminCategory::class, 'edit']);
+        Route::post('update/{category}', [AdminCategory::class, 'update']);
+        Route::get('delete/{category}', [AdminCategory::class, 'delete']);
     });
 
     //product

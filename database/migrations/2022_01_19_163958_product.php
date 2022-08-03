@@ -24,6 +24,7 @@ class Product extends Migration
             $table->longText('description');
             $table->string('brand');
             $table->integer('status');
+            $table->json('size');
             $table->unsignedBigInteger('categoryId');
             $table->foreign('categoryId')->references('id')->on('categories');
             $table->timestamps();

@@ -23,6 +23,9 @@ class Product extends Model
         'categoryId',
     ];
 
+    protected $casts = [
+        'size' => 'array',
+    ];
     public function category()
     {
         return $this->belongsTo(Category::class, 'categoryId', 'id');

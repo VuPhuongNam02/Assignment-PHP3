@@ -11,36 +11,34 @@
 
         <div class="sidebar-content flex-w w-full p-lr-65 js-pscroll">
             <ul class="sidebar-link w-full">
-                @if(\Illuminate\Support\Facades\Auth::check())
+                @if (\Illuminate\Support\Facades\Auth::check())
+                    <li class="p-b-13">
+                        <a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+                            My Wishlist
+                        </a>
+                    </li>
 
-                <li class="p-b-13">
-                    <a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-                        My Wishlist
-                    </a>
-                </li>
+                    <li class="p-b-13">
+                        <a href="/tai-khoan" class="stext-102 cl2 hov-cl1 trans-04">
+                            My Account
+                        </a>
+                    </li>
 
-                <li class="p-b-13">
-                    <a href="/tai-khoan" class="stext-102 cl2 hov-cl1 trans-04">
-                        My Account
-                    </a>
-                </li>
-
-                <li class="p-b-13">
-                        {{\Illuminate\Support\Facades\Auth::user()->name}}
-                </li>
+                    <li class="p-b-13">
+                        {{ \Illuminate\Support\Facades\Auth::user()->name }}
+                    </li>
                     <div class="sidebar-gallery w-full">
-                        <a href="/dang-xuat" class="mtext-101 cl5">
+                        <a href="/logout" class="mtext-101 cl5">
                             Đăng xuất
                         </a>
                     </div>
                 @else
-
-            <div class="sidebar-gallery w-full">
-					<a href="/dang-nhap" class="mtext-101 cl5">
-					Đăng nhập
-					</a>
-            </div>
-            @endif
+                    <div class="sidebar-gallery w-full">
+                        <a href="/dang-nhap" class="mtext-101 cl5">
+                            Đăng nhập
+                        </a>
+                    </div>
+                @endif
         </div>
     </div>
 </aside>

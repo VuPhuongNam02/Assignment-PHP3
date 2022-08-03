@@ -25,11 +25,21 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Slug</th>
-                                <th>Parent</th>
                             </tr>
                         </thead>
                         <tbody>
-                         {!! \App\Helpers\Helper::menu($menus) !!}
+                            @foreach ($collection as $item)
+                                <tr>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->slug }}</td>
+                                    <td>
+                                        <a href="/category/edit/{{ $item->id }}">Edit</a>
+                                    </td>
+                                    <td>
+                                        <a href="/category/delete/{{ $item->id }}">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

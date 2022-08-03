@@ -10,18 +10,13 @@ use Illuminate\Support\Facades\DB;
 class AdminCategory extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->cate =
-    // }
-
     public function index()
     {
         $collection = Category::all();
         return view('admin.category.list', [
             'title' => 'Admin | Category',
             'content' => 'List Category',
-            'menus' => $collection
+            'collection' => $collection
         ]);
     }
 
@@ -38,38 +33,31 @@ class AdminCategory extends Controller
     public function store(Request $request)
     {
         $cate = new Category();
-        $cate->catName = $request->catName;
-        $cate->slug = Str::slug($request->catName, '-');
-        $cate->parent = $request->parent;
+        $cate->fill($request->all());
+        $cate->slug = Str::slug($request->name, '-');
         $cate->save();
-        // $this->cate->fill($request->all());
         return redirect()->route('list.cate')->with('success', 'Create category successfully !');
     }
 
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $cate = Category::find($id);
-        $list_cate = DB::table('category')->where('parent', '>', 0)->get();
         return view('admin.category.edit', [
             'title' => 'Category | Edit',
             'content' => 'Edit Category',
-            'cate' => $cate,
-            'list' => $list_cate
+            'cate' => $category,
         ]);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        $cate = Category::find($id);
-        $cate->fill($request->all());
-        $cate->slug = Str::slug($request->catName, '-');
-        $cate->save();
+        $category->fill($request->all());
+        $category->slug = Str::slug($request->name, '-');
+        $category->save();
 
         return redirect()->route('list.cate')->with('success', 'Update category successfully !');
     }
-    public function delete($id)
+    public function delete(Category $category)
     {
-        $cate = Category::find($id);
-        $cate->delete();
+        $category->delete();
         return redirect()->route('list.cate')->with('success', 'Delete category successfully !');
     }
 }

@@ -24,7 +24,6 @@ class ProductFactory extends Factory
             'code' => Str::random(6),
             'slug' => $this->faker->slug(6),
             'sale' => rand(1, 100),
-            'size' => "['m', 'lg', 'sm']",
             'description' => $this->faker->text(),
             'brand' => $this->faker->name(),
             'categoryId' => rand(1, 3),

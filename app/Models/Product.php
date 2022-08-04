@@ -23,9 +23,7 @@ class Product extends Model
         'categoryId',
     ];
 
-    protected $casts = [
-        'size' => 'array',
-    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'categoryId', 'id');
@@ -34,5 +32,10 @@ class Product extends Model
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class, 'productId', 'id');
+    }
+
+    public function product_size()
+    {
+        return $this->hasMany(ProductSize::class, 'productId', 'id');
     }
 }

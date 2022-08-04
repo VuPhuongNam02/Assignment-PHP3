@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 
 class AdminCategory extends Controller
 {
@@ -22,18 +23,16 @@ class AdminCategory extends Controller
 
     public function create()
     {
-        $list_cate = DB::select('SELECT * FROM category');
         return view('admin.category.create', [
             'title' => 'Category | Create',
             'content' => 'Create Category',
-            'list' => $list_cate
         ]);
     }
 
     public function store(Request $request)
     {
         $cate = new Category();
-        $cate->fill($request->all());
+        $cate->name = $request->name;
         $cate->slug = Str::slug($request->name, '-');
         $cate->save();
         return redirect()->route('list.cate')->with('success', 'Create category successfully !');
@@ -57,6 +56,10 @@ class AdminCategory extends Controller
     }
     public function delete(Category $category)
     {
+        $product = Product::where('categoryId', $category->id)->get();
+        $productIds = $product->pluck('id');
+        Product::whereIn('id', $productIds)->update(['categoryId' => 0]);
+        // dd($product);
         $category->delete();
         return redirect()->route('list.cate')->with('success', 'Delete category successfully !');
     }

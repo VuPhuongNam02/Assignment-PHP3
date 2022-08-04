@@ -35,12 +35,22 @@
                                         <li><span style="color: darkred">Price: </span>{{ $item->price }}</li>
                                     </td>
                                     <td>
-                                        <li><span style="color: darkred">Image: </span><img
-                                                src="/Backend/img/{{ $item->image }}"></li>
-                                        <li><span style="color: darkred">Sale: </span>{{ $item->sale }}</li>
-                                        <li><span style="color: darkred">CatId: </span>{{ $item->catId }}</li>
-                                    </td>
+                                        <li><span style="color: darkred">Image: </span><img src="{{ asset($item->image) }}">
+                                        </li>
 
+                                        <li><span style="color: darkred">Sale: </span>{{ $item->sale }}</li>
+                                        <li><span style="color: darkred">Category: </span>{{ $item->category->name }}</li>
+                                    </td>
+                                    <td>
+                                        @php
+                                            $a = json_decode($item->size);
+                                            foreach (explode($a, '') as $key => $value) {
+                                                va_dump($value);
+                                            }
+                                        @endphp
+
+                                        <li><span style="color: darkred">Size: </span></li>
+                                    </td>
                                     <td><a href="/product/edit/{{ $item->id }}" class="btn btn-warning">Edit</a>
                                     </td>
                                     <td><a href="/product/destroy/{{ $item->id }}" class="btn btn-danger">Delete</a>

@@ -35,26 +35,22 @@
                                         <li><span style="color: darkred">Price: </span>{{ $item->price }}</li>
                                     </td>
                                     <td>
-                                        <li><span style="color: darkred">Image: </span><img src="{{ asset($item->image) }}">
+                                        <li><span style="color: darkred">Image: </span><img src="{{ asset($item->image) }}"
+                                                width="150">
                                         </li>
 
                                         <li><span style="color: darkred">Sale: </span>{{ $item->sale }}</li>
                                         <li><span style="color: darkred">Category: </span>{{ $item->category->name }}</li>
                                     </td>
                                     <td>
-                                        @php
-                                            $a = json_decode($item->size);
-                                            foreach (explode($a, '') as $key => $value) {
-                                                va_dump($value);
-                                            }
-                                        @endphp
-
-                                        <li><span style="color: darkred">Size: </span></li>
+                                        <li><span style="color: darkred">Size:
+                                                {{ \App\Helpers\Helper::loadSize($item->id, true) }}
+                                            </span></li>
                                     </td>
                                     <td><a href="/product/edit/{{ $item->id }}" class="btn btn-warning">Edit</a>
                                     </td>
-                                    <td><a href="/product/destroy/{{ $item->id }}" class="btn btn-danger">Delete</a>
-                                    </td>
+                                    {{-- <td><a href="/product/destroy/{{ $item->id }}" class="btn btn-danger">Delete</a>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

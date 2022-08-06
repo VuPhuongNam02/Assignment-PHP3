@@ -29,51 +29,18 @@
                     <textarea name="description" id="editor"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="">Brand</label>
-                    <select name="brand" class="form-control">
-                        <option value="Nike">Nike</option>
-                        <option value="Vans">Vans</option>
-                        <option value="Jordan">Jordan</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="">Gender</label>
-                    <select name="gender" class="form-control">
-                        <option value="all">all</option>
-                        <option value="male">male</option>
-                        <option value="female">female</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="">Size</label><br>
-                    <input style="margin-left:25px" type="checkbox" value="36" name="size[]" id="36">
-                    <label for="36">36</label>
-                    <input style="margin-left:25px" type="checkbox" value="37" name="size[]" id="37">
-                    <label for="37">37</label>
-
-                    <input style="margin-left:25px" type="checkbox" value="38" name="size[]" id="38">
-                    <label for="38">38</label>
-
-                    <input style="margin-left:25px" type="checkbox" value="39" name="size[]" id="39">
-                    <label for="39">39</label>
-
-                    <input style="margin-left:25px" type="checkbox" value="40" name="size[]" id="40">
-                    <label for="40">40</label>
-
-                    <input style="margin-left:25px" type="checkbox" value="41" name="size[]" id="41">
-                    <label for="41">41</label>
-
-                    <input style="margin-left:25px" type="checkbox" value="42" name="size[]" id="42">
-                    <label for="42">42</label>
-
-                    <input style="margin-left:25px" type="checkbox" value="43" name="size[]" id="43">
-                    <label for="43">43</label>
+                    @foreach ($sizes as $item)
+                        <input style="margin-left:25px" type="checkbox" value={{ $item->id }} name="sizeId[]"
+                            id={{ $item->id }}>
+                        <label for={{ $item->id }}>{{ $item->name }}</label>
+                    @endforeach
                 </div>
                 <div class="form-group">
                     <label for="">Category</label>
-                    <select name="catId" class="form-control">
-                        @foreach ($listCate as $val)
-                            <option value="{{ $val->id }}">{{ $val->catName }}</option>
+                    <select name="categoryId" class="form-control">
+                        @foreach ($categories as $val)
+                            <option value="{{ $val->id }}">{{ $val->name }}</option>
                         @endforeach
                     </select>
                 </div>

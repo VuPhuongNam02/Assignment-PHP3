@@ -8,6 +8,7 @@
         <section class="recent">
 
             <form action="/product/update/{{ $pro->id }}" enctype="multipart/form-data" method="POST">
+                @method('PATCH')
                 <div class="form-group">
                     <label for="">Name</label>
                     <input type="text" name="name" value="{{ $pro->name }}" class="form-control">
@@ -22,41 +23,21 @@
                 </div>
                 <div class="form-group">
                     <label for="">image</label>
-                    <img src="/Backend/img/{{ $pro->image }}" width="60" height="60" />
-                    <input type="hidden" name="avatar" value="{{ $pro->image }}">
+                    <img src="{{ asset($pro->image) }}" width="150" />
+                    {{-- <input type="hidden" name="avatar" value="{{ $pro->image }}"> --}}
                     <input type="file" name="image" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="">desc</label>
-                    <textarea name="desc" id="editor">{{ $pro->description }}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Brand</label>
-                    <select name="brand" class="form-control">
-                        <option selected hidden value="<?= $pro->brand ?>"><?= $pro->brand ?></option>
-                        <option value="Nike">Nike</option>
-                        <option value="Vans">Vans</option>
-                        <option value="Jordan">Jordan</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Gender</label>
-                    <select name="gender" class="form-control">
-                        <option selected hidden value="<?= $pro->gender ?>"><?= $pro->gender ?></option>
-                        <option value="all">all</option>
-                        <option value="male">male</option>
-                        <option value="female">female</option>
-                    </select>
+                    <textarea name="description" id="editor">{{ $pro->description }}</textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="">Category</label>
-                    <select name="catId" class="form-control">
-                        <option selected hidden value="{{ $pro->catId }}">{{ $pro->catName }}</option>
+                    <select name="categoryId" class="form-control">
+                        <option selected hidden value="{{ $pro->category->id }}">{{ $pro->category->name }}</option>
                         @foreach ($listCate as $val)
-                            <option value="{{ $val->id }}">{{ $val->catName }}</option>
+                            <option value="{{ $val->id }}">{{ $val->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -71,13 +52,10 @@
                 </div>
                 <div class="form-group">
                     <label for="">Size</label><br>
-                    @php
-                        $size = explode(',', $pro->size);
-                    @endphp
-                    @foreach ($size as $key => $val)
-                        <input style="margin-left:25px" checked type="checkbox" value="<?= $val ?>" name="size[]"
-                            id="<?= $val ?>">
-                        <label for="<?= $val ?>"><?= $val ?></label>
+                    @foreach ($list_size as $val)
+                        <input style="margin-left:25px" type="checkbox" value="{{ $val->id }}" name="sizeId[]"
+                            {{ \App\Helpers\Helper::loadSize($pro->id, false, $val->id) }} />
+                        <label>{{ $val->name }}</label>
                     @endforeach
                 </div>
                 <div class="form-group">

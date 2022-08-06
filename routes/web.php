@@ -46,9 +46,9 @@ Route::middleware('CheckAdmin')->group(function () {
         Route::get('list', [AdminProduct::class, 'index'])->name('list.pro');
         Route::get('create', [AdminProduct::class, 'create']);
         Route::post('store', [AdminProduct::class, 'store']);
-        Route::get('edit/{id}', [AdminProduct::class, 'edit']);
-        Route::post('update/{id}', [AdminProduct::class, 'update']);
-        Route::get('destroy/{id}', [AdminProduct::class, 'destroy']);
+        Route::get('edit/{product}', [AdminProduct::class, 'edit']);
+        Route::patch('update/{product}', [AdminProduct::class, 'update']);
+        Route::get('destroy/{product}', [AdminProduct::class, 'destroy']);
     });
 
     //Slider

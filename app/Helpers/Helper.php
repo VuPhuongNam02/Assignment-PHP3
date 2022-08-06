@@ -2,8 +2,35 @@
 
 namespace App\Helpers;
 
+use App\Models\ProductSize as ModelsProductSize;
+
 class Helper
 {
+    public static function loadSize($productId,  $isLoadList = false, $sizeId = 0)
+    {
+        $proSize = ModelsProductSize::with('size')->where('productId', $productId)->get();
+        $i = 1;
+        $sumSize = count($proSize);
+
+        foreach ($proSize as  $val) {
+
+            if ($val->size->id === $sizeId) {
+                echo "checked";
+            }
+            if ($isLoadList) {
+                echo  $i == $sumSize ? $val->size->name : $val->size->name . ' ,';
+            }
+            $i++;
+        }
+    }
+
+    public static function loadSizeEdit($productId, $sizeId)
+    {
+        $proSize = ModelsProductSize::with('size')->where('productId', $productId)->get();
+        foreach ($proSize as $val) {
+        }
+    }
+
     public static function menu($menus, $parent_id = 0, $father = '')
     {
         $html = '';
@@ -26,19 +53,20 @@ class Helper
         return $html;
     }
 
-    public static function menus($menus){
+    public static function menus($menus)
+    {
         $html = '';
-        foreach ($menus as $key => $father){
+        foreach ($menus as $key => $father) {
             if ($father->parent == 0) {
                 $html .= '
                          <li>
-                            <a href="javascript:void(0)">'.$father->catName.'</a>';
+                            <a href="javascript:void(0)">' . $father->catName . '</a>';
 
-                foreach ($menus as $child){
-                    if($father->id == $child->parent){
-                       $html .= '<ul class="sub-menu">
+                foreach ($menus as $child) {
+                    if ($father->id == $child->parent) {
+                        $html .= '<ul class="sub-menu">
                                     <li>
-                                        <a href="/danh-muc/' . $child->id . '-' . $child->slug . '.html">'.$child->catName.'</a>
+                                        <a href="/danh-muc/' . $child->id . '-' . $child->slug . '.html">' . $child->catName . '</a>
                                     </li>
                                 </ul> ';
                     }
@@ -49,12 +77,23 @@ class Helper
         return $html;
     }
 
-    public static function price($price,$sale,$string = null){
-        if ($sale > 0){
-            return number_format(($price - ($price * $sale / 100)),0,',','.') . $string;
-        }else{
-            return number_format($price,0,',','.') . $string;
+    public static function price($price, $sale, $string = null)
+    {
+        if ($sale > 0) {
+            return number_format(($price - ($price * $sale / 100)), 0, ',', '.') . $string;
+        } else {
+            return number_format($price, 0, ',', '.') . $string;
         }
     }
 
+    public static function saveImage($hasFile, $imgRequest, $folder, $field, $isUpdate = false)
+    {
+        if ($hasFile) {
+            $avatar = $imgRequest;
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            return $field = $avatar->storeAs('/images/' . $folder, $filename);
+        } else {
+            return $field = $isUpdate ? $field : '/images/users/user-default.png';
+        }
+    }
 }

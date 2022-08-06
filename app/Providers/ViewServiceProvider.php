@@ -29,7 +29,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('include.nav', MenuComposer::class);
+        View::composer(['include.nav', 'product.list'], MenuComposer::class);
         View::composer('cart', CartComposer::class);
     }
 }

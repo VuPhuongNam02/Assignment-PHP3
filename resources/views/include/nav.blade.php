@@ -16,9 +16,16 @@
                         <li class="active-menu">
                             <a href="/">Home</a>
                         </li>
-                        {!! \App\Helpers\Helper::menus($menus) !!}
+
                         <li>
-                            <a href="product.html">Shop</a>
+                            <a href="/cua-hang">Shop</a>
+                            <ul class="sub-menu">
+                                @foreach ($menus as $item)
+                                    <li>
+                                        <a href="/cua-hang/{{ $item->slug }}">{{ $item->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </li>
 
                         <li class="label1" data-label1="hot">
@@ -48,7 +55,8 @@
                     </div>
 
                     <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
+                            data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
                     </div>
@@ -79,7 +87,8 @@
             </div>
 
             <div class="flex-c-m h-full p-lr-10 bor5">
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0}}">
+                <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
+                    data-notify="{{ !is_null(\Session::get('carts')) ? count(\Session::get('carts')) : 0 }}">
                     <i class="zmdi zmdi-shopping-cart"></i>
                 </div>
             </div>
@@ -87,9 +96,9 @@
 
         <!-- Button show menu -->
         <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-                    <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
-                    </span>
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
         </div>
     </div>
 
@@ -105,8 +114,8 @@
                     <li><a href="home-03.html">Homepage 3</a></li>
                 </ul>
                 <span class="arrow-main-menu-m">
-                            <i class="fa fa-angle-right" aria-hidden="true"></i>
-                        </span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </span>
             </li>
 
             <li>

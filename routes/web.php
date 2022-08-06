@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AdminProduct;
 use App\Http\Controllers\Home;
 use \App\Http\Controllers\AdminSlider;
-use \App\Http\Controllers\ProductDetail;
 use \App\Http\Controllers\Profile;
 use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,4 +85,11 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 //product
-Route::get('/san-pham/{id}-{slug}.html', [ProductDetail::class, 'index']);
+Route::get('/cua-hang', [ProductController::class, 'index']);
+Route::get('/cua-hang/{slug}', [ProductController::class, 'index']);
+
+Route::get('/san-pham/{slug}', [ProductController::class, 'index']);
+Route::get('/san-pham', [ProductController::class, 'index']);
+
+
+Route::get('/lien-he', [ContactController::class, 'index']);

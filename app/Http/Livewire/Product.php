@@ -30,7 +30,7 @@ class Product extends Component
 
     public function render()
     {
-        $this->products = ModelsProduct::select('id', 'name', 'price', 'sale', 'image')
+        $this->products = ModelsProduct::select('id', 'name', 'price', 'sale', 'image', 'slug')
             ->when($this->categoryId, function ($query) {
                 $query->where('categoryId', $this->categoryId);
             })

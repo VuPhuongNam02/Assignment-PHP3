@@ -30,6 +30,6 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(['include.nav', 'product.list', 'livewire.product'], MenuComposer::class);
-        View::composer('cart', CartComposer::class);
+        View::composer(['cart', 'include.nav'], CartComposer::class);
     }
 }

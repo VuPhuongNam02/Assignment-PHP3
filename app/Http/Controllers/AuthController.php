@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     protected $auth;
+
     public function signin()
     {
         return view('auth.login', [
-            'title' => 'Đăng nhập'
+            'title' => 'Đăng nhập',
         ]);
     }
 
@@ -32,7 +32,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ])) {
-            return redirect('/admin');
+            return redirect($request->callback_url != '' ? $request->callback_url : '/admin');
         } else {
             return redirect()->back();
         }

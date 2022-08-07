@@ -6,7 +6,7 @@ use App\Models\ProductSize as ModelsProductSize;
 
 class Helper
 {
-    public static function loadSize($productId,  $isLoadList = false, $sizeId = 0)
+    public static function loadSize($productId,  $isLoadList = false, $sizeId = 0, $isLoadSingle = false)
     {
         $proSize = ModelsProductSize::with('size')->where('productId', $productId)->get();
         $i = 1;
@@ -20,6 +20,12 @@ class Helper
             if ($isLoadList) {
                 echo  $i == $sumSize ? $val->size->name : $val->size->name . ' ,';
             }
+            if ($isLoadSingle) {
+?>
+<option value="<?= $val->size->id ?>">Size <?= $val->size->name ?></option>
+<?php
+            }
+
             $i++;
         }
     }

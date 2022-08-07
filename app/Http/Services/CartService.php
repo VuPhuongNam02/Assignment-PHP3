@@ -9,35 +9,34 @@ use Illuminate\Support\Facades\Session;
 
 class CartService
 {
-    public function create($request){
-        $qty = (int)$request->input('num-product');
-        $pro_id = (int)$request->input('product_id');
+    public static function create($request, $productId)
+    {
+        $qty = (int)$request['quantity'];
+        // $size = (int)$request->input('sizeId');
 
-        $size = $request->size;
-
-        if ($qty <= 0 || $pro_id <=0){
-            Session::flash('error','Số lượng hoặc sản phẩm không chính xác');
+        if ($qty <= 0 || $productId <= 0) {
+            Session::flash('error', 'Số lượng hoặc sản phẩm không chính xác');
             return false;
         }
-// Session::forget('carts');
+        // Session::forget('carts');
 
-      $carts = Session::get('carts');
-//        dd($carts);
+        $carts = Session::get('carts');
+        //        dd($carts);
 
-        if (!$carts){
+        if (!$carts) {
             Session::put('carts', [
-                $pro_id => $qty
+                $productId => $qty
             ]);
             return true;
         }
 
-        if (isset($carts[$pro_id])){
-            $carts[$pro_id] = $carts[$pro_id] + $qty;
+        if (isset($carts[$productId])) {
+            $carts[$productId] = $carts[$productId] + $qty;
             Session::put('carts', $carts);
             return true;
         }
 
-        $carts[$pro_id] = $qty;
+        $carts[$productId] = $qty;
         Session::put('carts', $carts);
 
         return true;
@@ -54,11 +53,12 @@ class CartService
             ->get();
     }
 
-    public function update($id,$qty){
+    public function update($id, $qty)
+    {
         $carts = Session::get('carts');
-        $exits = Arr::exists($carts,$id);
+        $exits = Arr::exists($carts, $id);
 
-        if ($exits){
+        if ($exits) {
             $carts[$id] = (int)$qty;
             Session::put('carts', $carts);
         }

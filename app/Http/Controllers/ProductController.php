@@ -16,7 +16,7 @@ class ProductController extends Controller
             $cate = Category::with('products')->where('slug', $slug)->first();
             $products = $cate->products;
         } else {
-            $products = Product::select('id', 'name', 'price', 'sale', 'image')->get();
+            $products = Product::select('id', 'name', 'price', 'sale', 'image', 'slug')->get();
         }
 
         return view('product.list', [
@@ -24,6 +24,16 @@ class ProductController extends Controller
             'products' => $products,
             'listSize' => Size::all(),
             'slug' => $slug
+        ]);
+    }
+
+    public function detail($slug)
+    {
+        $product = Product::where('slug', $slug)->first();
+        return view('product.detail', [
+            'title' => $product->name,
+            'product' => $product,
+            'productId' => $product->id
         ]);
     }
 }

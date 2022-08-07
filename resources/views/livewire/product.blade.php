@@ -135,7 +135,7 @@
                                 <div class="block2-txt-child1 flex-col-l ">
                                     <a href="/san-pham/{{ $pro->slug }}"
                                         class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        {{ $pro->name }}
+                                        {{ $pro->slug }}
                                     </a>
 
                                     <span class="stext-105 cl3">

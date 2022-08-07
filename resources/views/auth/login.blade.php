@@ -8,6 +8,7 @@
                     <h2 class="text-center">Đăng nhập</h2>
                     <p class="text-center">Đăng nhập với email và mật khẩu của bạn</p><br>
                     @csrf
+                    <input type="hidden" value="{{ $_GET['callback_url'] }}" name="callback_url">
                     <div class="form-group">
                         <input class="form-control" type="text" name="email" value="{{ old('email') }}"
                             placeholder="Địa chỉ Email ">

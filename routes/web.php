@@ -10,6 +10,7 @@ use \App\Http\Controllers\Profile;
 use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Livewire\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,9 +87,10 @@ Route::post('/login', [AuthController::class, 'login']);
 
 //product
 Route::get('/cua-hang', [ProductController::class, 'index']);
-Route::get('/cua-hang/{slug}', [ProductController::class, 'index']);
+Route::get('/cua-hang/{slug?}', [ProductController::class, 'index']);
+Route::get('size={size}', [ProductController::class, 'index']);
 
-Route::get('/san-pham/{slug}', [ProductController::class, 'index']);
+Route::get('/san-pham/{slug}', [ProductController::class, 'detail']);
 Route::get('/san-pham', [ProductController::class, 'index']);
 
 

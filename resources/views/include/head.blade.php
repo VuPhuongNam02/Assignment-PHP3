@@ -1,4 +1,3 @@
-
 <title>{{ $title }}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -6,7 +5,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!--===============================================================================================-->
-<link rel="icon" type="image/png" href="/Frontend/img/favicon.ico"/>
+<link rel="icon" type="image/png" href="/Frontend/img/favicon.ico" />
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="/Frontend/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -36,3 +35,4 @@
 <link rel="stylesheet" type="text/css" href="/Frontend/css/main.css">
 <!--===============================================================================================-->
 
+@livewireStyles

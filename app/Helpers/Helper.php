@@ -24,12 +24,6 @@ class Helper
         }
     }
 
-    public static function loadSizeEdit($productId, $sizeId)
-    {
-        $proSize = ModelsProductSize::with('size')->where('productId', $productId)->get();
-        foreach ($proSize as $val) {
-        }
-    }
 
     public static function menu($menus, $parent_id = 0, $father = '')
     {

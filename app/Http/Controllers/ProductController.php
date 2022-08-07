@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index($slug = '')
+    public function index($slug = '', $size = '')
     {
+
         if ($slug != '') {
             $cate = Category::with('products')->where('slug', $slug)->first();
             $products = $cate->products;
@@ -20,7 +21,9 @@ class ProductController extends Controller
 
         return view('product.list', [
             'title' => 'Cửa hàng',
-            'products' => $products
+            'products' => $products,
+            'listSize' => Size::all(),
+            'slug' => $slug
         ]);
     }
 }

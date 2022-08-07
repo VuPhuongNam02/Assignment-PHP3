@@ -40,14 +40,31 @@ class Cart extends Component
     {
         if (Auth::check()) {
             $validate = $this->validate();
-            ModelsCart::create([
-                'size' => $validate['size'],
-                'quantity' => $validate['quantity'],
-                'userId' => Auth::id(),
-                'productId' => $this->product->id,
-            ]);
-            $this->resetField();
+
+
+            $checkCart = ModelsCart::where('userId', Auth::id())
+                ->where('productId', $this->product->id)
+                ->where('size', $validate['size'])
+                ->first();
+
+            if ($checkCart) {
+                ModelsCart::where('userId', Auth::id())
+                    ->where('productId', $this->product->id)
+                    ->where('size', $validate['size'])
+                    ->update([
+                        'quantity' => $checkCart->quantity += $validate['quantity'],
+                    ]);
+            } else {
+                ModelsCart::create([
+                    'size' => $validate['size'],
+                    'quantity' => $validate['quantity'],
+                    'userId' => Auth::id(),
+                    'productId' => $this->product->id,
+                ]);
+            }
             $this->emit('counter-update');
+
+            $this->resetField();
         } else {
             return redirect('/dang-nhap?callback_url=/san-pham/' . $this->product->slug);
         }

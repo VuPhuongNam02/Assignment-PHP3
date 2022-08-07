@@ -22,7 +22,7 @@ class Helper
             }
             if ($isLoadSingle) {
 ?>
-<option value="<?= $val->size->id ?>">Size <?= $val->size->name ?></option>
+<option value="<?= $val->size->name ?>">Size <?= $val->size->name ?></option>
 <?php
             }
 
@@ -77,7 +77,7 @@ class Helper
         return $html;
     }
 
-    public static function price($price, $sale, $string = null)
+    public static function price($price, $sale = 0, $string = null)
     {
         if ($sale > 0) {
             return number_format(($price - ($price * $sale / 100)), 0, ',', '.') . $string;
